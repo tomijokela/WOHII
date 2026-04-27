@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const prisma = require("../lib/prisma");
-//const questions = require("../data/questions");
+const authenticate = require("../middleware/auth");
+const isOwner = require("../middleware/isOwner");
 
 function formatQuestion(question) {
   return {
@@ -96,6 +97,7 @@ router.put("/:qId", async (req, res) => {
     where: { id: qId },
     data: {
       title, date: new Date(date), content,
+      userId: req.user.userId,
       keywords: {
         set: [],
         connectOrCreate: keywordsArray.map((kw) => ({

@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+
+const postsRouter = require("./routes/posts");
+const authRouter = require("./routes/auth");
+
 const PORT = process.env.PORT || 3006;
 const prisma = require("./lib/prisma");
 
@@ -13,6 +17,12 @@ app.use("/api/questions", questionsRouter);
 
 app.use((req, res) => {
   res.json({msg: "Not found"});
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Internal server error" });
 });
 
 // Start the server
