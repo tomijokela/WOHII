@@ -15,6 +15,8 @@ app.use(express.json());
 // everything under /api/questions
 app.use("/api/questions", questionsRouter);
 
+app.use("/api/auth", authRouter);
+
 app.use((req, res) => {
   res.json({msg: "Not found"});
 });

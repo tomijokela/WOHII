@@ -4,6 +4,9 @@ const prisma = require("../lib/prisma");
 const authenticate = require("../middleware/auth");
 const isOwner = require("../middleware/isOwner");
 
+// Apply authentication to ALL routes in this router
+router.use(authenticate);
+
 function formatQuestion(question) {
   return {
     ...question,
