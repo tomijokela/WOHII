@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const postsRouter = require("./routes/posts");
+const postsRouter = require("./routes/questions");
 const authRouter = require("./routes/auth");
 
 const PORT = process.env.PORT || 3006;
